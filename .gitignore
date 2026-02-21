@@ -1,27 +1,35 @@
 # Gradle
-.gradle
+.gradle/
 build/
 !gradle/wrapper/gradle-wrapper.jar
 
 # IntelliJ IDEA
-.idea
+.idea/
 *.iws
 *.iml
 *.ipr
 out/
+cmake-build-*/
 
-# Eclipse
-.classpath
-.project
-.settings/
-.metadata/
-bin/
+# VS Code
+.vscode/
+.history/
+*.code-workspace
 
-# Java
+# Java & Misc
 *.class
 *.jar
 *.war
 *.ear
+hs_err_pid*
+replay_pid*
+
+# Configuration & Secrets
+.env
+.env.local
+.env.*.local
+application-local.properties
+application-dev.properties
 
 # Logs
 logs/
@@ -30,3 +38,9 @@ logs/
 # OS
 .DS_Store
 Thumbs.db
+desktop.ini
+
+# Testing
+# (Optional) If you use playwright or similar later
+# test-results/
+# playwright-report/

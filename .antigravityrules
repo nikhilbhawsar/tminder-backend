@@ -1,10 +1,10 @@
 # TMinder Backend - Development Rules
 
-1. **Permission First**: DO NOT create, modify, or delete any code files (Java, Gradle, etc.) without explicit user permission. Always propose the change or ask first.
-2. **Architecture**: Adhere strictly to **Clean Architecture**.
+1. **Permission First**: DO NOT create, modify, or delete any code files (Java, Gradle, etc.) without explicit user permission. Propose the change in the chat first.
+2. **No Automatic Commits/Pushes**: NEVER execute `git commit` or `git push` commands autonomously. Always provide the command for the user to run or wait for explicit instruction to run it.
+3. **Architecture**: Adhere strictly to **Clean Architecture**.
     - `domain`: Pure business logic/entities (no frameworks).
     - `application`: Use cases and service interfaces.
     - `infrastructure`: Technical implementations (DB, external APIs).
     - `api`: REST Controllers and web-facing logic.
-3. **Documentation**: Keep the `README.md` updated with cross-platform instructions (macOS/Windows).
-4. **Git Hygiene**: Commit logical chunks with descriptive messages.
+4. **Documentation**: Keep the `README.md` updated with cross-platform instructions (macOS/Windows).

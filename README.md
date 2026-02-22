@@ -21,6 +21,7 @@ We follow **Clean Architecture** to ensure the business logic remains independen
 To get the project running on your local machine, please follow our detailed setup guide:
 
 👉 **[View Setup Instructions (macOS/Windows)](setup.md)**
+📄 **[Database Setup & Sharing Guide (macOS/Windows)](db_setup.md)**
 
 ---
 

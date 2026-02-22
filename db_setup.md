@@ -42,14 +42,8 @@ Replace `<pg_user>` with your PostgreSQL user (often `postgres`). After the comm
 # 1. Ensure PostgreSQL client is available
 brew install postgresql   # if not already installed
 
-# 2. Export the entire database (replace <db_name> and <pg_user>)
-pg_dump -Fc -h localhost -U <pg_user> -d <db_name> -f tminder_backup.dump
+The export commands have been omitted because this guide is intended **only for sharing an already‑created dump file**. Use the `tminder_backup.dump` that you generated earlier.
 
-# 3. (Optional) Compress the dump to make it smaller for transfer
-gzip -c tminder_backup.dump > tminder_backup.dump.gz
-
-# 4. Verify the dump (optional)
-pg_restore --list -f - tminder_backup.dump
 ```
 
 The resulting `tminder_backup.dump` (or `tminder_backup.dump.gz`) contains **schema, data, indexes, constraints** and can be restored on any PostgreSQL instance of the same major version.
@@ -108,6 +102,57 @@ createdb -U postgres -h localhost tminder_dev; pg_restore -U postgres -h localho
 ```
 
 ---
+## 🚢 Dockerized Workflow (Future)
+
+We will run all tools (PostgreSQL, backend, scripts) inside Docker containers. Below is a minimal `docker-compose.yml` you can use.
+
+```yaml
+version: "3.9"
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: tminder-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: tminder
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./tminder_backup.dump:/docker-entrypoint-initdb.d/tminder_backup.dump   # mount the dump
+    ports:
+      - "5432:5432"
+
+  backend:
+    build: .
+    container_name: tminder-backend
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/tminder
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: password
+    ports:
+      - "8080:8080"
+
+volumes:
+  pgdata:
+```
+
+### How it works
+1. **`docker compose up -d`** starts the PostgreSQL container and the backend.
+2. The dump file is mounted into `/docker-entrypoint-initdb.d/`; PostgreSQL’s entrypoint will automatically run `pg_restore` the first time the container starts, populating the database.
+3. To run any script (e.g., `check_stats.py`) inside the same environment, use:
+   ```bash
+   docker compose run --rm backend python3 scripts/check_stats.py
+   ```
+4. If you need to manually restore a dump later:
+   ```bash
+   docker cp tminder_backup.dump tminder-db:/tmp/
+   docker exec -i tminder-db pg_restore -U postgres -d tminder -Fc /tmp/tminder_backup.dump
+   ```
+
+This setup ensures the entire development stack is reproducible across macOS, Windows, or Linux machines. Feel free to adjust the `Dockerfile` or `docker-compose.yml` to match your project's needs.
+
 
 ## 📚 Further Reading
 

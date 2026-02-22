@@ -1,0 +1,7 @@
+ALTER TABLE media ADD COLUMN title_type VARCHAR(50);
+ALTER TABLE media ADD COLUMN original_title TEXT;
+ALTER TABLE media ADD COLUMN is_adult BOOLEAN;
+ALTER TABLE media ADD COLUMN start_year INTEGER;
+ALTER TABLE media ADD COLUMN end_year INTEGER;
+ALTER TABLE media ADD COLUMN runtime_minutes INTEGER;
+ALTER TABLE media ADD COLUMN genres TEXT[];

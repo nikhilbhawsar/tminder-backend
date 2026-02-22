@@ -17,6 +17,7 @@ cmake-build-*/
 *.code-workspace
 
 # Java & Misc
+bin/
 *.class
 *.jar
 *.war
@@ -44,3 +45,16 @@ desktop.ini
 # (Optional) If you use playwright or similar later
 # test-results/
 # playwright-report/
+
+
+# Gradle build output
+bin/
+bin/**/*
+build/
+out/
+
+# Alternative patterns to catch all possibilities
+**/bin/
+**/bin/**/*
+**/build/
+**/out/

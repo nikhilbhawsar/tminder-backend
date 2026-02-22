@@ -22,7 +22,7 @@ public class InMemoryMediaRepository implements MediaRepository {
     }
 
     @Override
-    public List<Media> searchByTitle(String text) {
+    public List<Media> searchByTitle(String text , String titleType) {
         return mediaList.stream()
                 .filter(m -> m.getTitle().toLowerCase().contains(text.toLowerCase()))
                 .collect(Collectors.toList());

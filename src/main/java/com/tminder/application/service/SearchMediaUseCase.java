@@ -17,6 +17,6 @@ public class SearchMediaUseCase {
         if (query == null || query.isBlank()) {
             return List.of();
         }
-        return mediaRepository.searchByTitle(query);
+        return mediaRepository.searchByTitle(query, "tvSeries");
     }
 }

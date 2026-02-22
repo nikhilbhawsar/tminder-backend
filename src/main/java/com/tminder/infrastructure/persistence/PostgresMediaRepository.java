@@ -4,6 +4,8 @@ import com.tminder.domain.model.Media;
 import com.tminder.domain.repository.MediaRepository;
 import com.tminder.infrastructure.persistence.entity.MediaEntity;
 import org.springframework.context.annotation.Primary;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -20,8 +22,9 @@ public class PostgresMediaRepository implements MediaRepository {
     }
 
     @Override
-    public List<Media> searchByTitle(String text) {
-        return jpaMediaRepository.findByTitleContainingIgnoreCase(text)
+    public List<Media> searchByTitle(String text, String titleType) {
+        Pageable pageable = PageRequest.of(0, 10);
+        return jpaMediaRepository.findByTitleTypeAndTitleContainingIgnoreCase(titleType,text, pageable)
                 .stream()
                 .map(entity -> new Media(entity.getId(), entity.getTitle()))
                 .collect(Collectors.toList());

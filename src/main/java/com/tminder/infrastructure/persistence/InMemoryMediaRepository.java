@@ -1,14 +1,12 @@
 package com.tminder.infrastructure.persistence;
 
 import com.tminder.api.dto.MediaResponse;
-import com.tminder.domain.model.Media;
 import com.tminder.domain.repository.MediaRepository;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Repository
 @Profile("test")

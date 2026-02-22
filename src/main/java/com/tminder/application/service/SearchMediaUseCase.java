@@ -1,7 +1,6 @@
 package com.tminder.application.service;
 
 import com.tminder.api.dto.MediaResponse;
-import com.tminder.domain.model.Media;
 import com.tminder.domain.repository.MediaRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;

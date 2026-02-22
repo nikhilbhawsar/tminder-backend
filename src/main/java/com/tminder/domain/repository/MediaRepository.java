@@ -1,8 +1,9 @@
 package com.tminder.domain.repository;
 
-import com.tminder.domain.model.Media;
+import com.tminder.api.dto.MediaResponse;
+
 import java.util.List;
 
 public interface MediaRepository {
-    List<Media> searchByTitle(String text, String titleType);
+    List<MediaResponse> searchByTitle(String text, String titleType);
 }

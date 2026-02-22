@@ -1,5 +1,6 @@
 package com.tminder.application.service;
 
+import com.tminder.api.dto.MediaResponse;
 import com.tminder.domain.model.Media;
 import com.tminder.domain.repository.MediaRepository;
 import org.springframework.stereotype.Service;
@@ -13,7 +14,7 @@ public class SearchMediaUseCase {
         this.mediaRepository = mediaRepository;
     }
 
-    public List<Media> execute(String query) {
+    public List<MediaResponse> execute(String query) {
         if (query == null || query.isBlank()) {
             return List.of();
         }
